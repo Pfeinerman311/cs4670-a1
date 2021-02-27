@@ -53,9 +53,9 @@ def threshold(img, thresh):
     for row in range(shape[0]):
         for x in range(shape[1]):
             if img[row,x] > thresh:
-                newImg[row,x] = 1
+                newImg[row,x] = 1.0
             else:
-                newImg[row,x] = 0
+                newImg[row,x] = 0.0
     return newImg
                
     # TODO-BLOCK-END
