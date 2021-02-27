@@ -17,7 +17,6 @@ def multiply(img, alpha):
     # TODO-BLOCK-BEGIN
     newImg = np.multiply(img, alpha)
     return newImg
-
     # TODO-BLOCK-END
 
 def normalize(img):
@@ -31,15 +30,34 @@ def normalize(img):
     # then return an image that is 0 everywhere
     # TODO 1c
     # TODO-BLOCK-BEGIN
-    pass
+    max = img[0,0]
+    min = img[0,0]
+    
+    for row in img:
+        for x in row:
+            if x > max:
+                max = x
+            elif x < min:
+                min = x
+    return add(multiply(img, 1/(max - min)), (min/(max - min)))            
     # TODO-BLOCK-END
+    
 def threshold(img, thresh):
     # Produces an image where pixels greater than thresh are assigned 1 and
     # those less than thresh are assigned 0
     # Make sure to return a float image
     # TODO 1d
     # TODO-BLOCK-BEGIN
-    pass
+    newImg = img.copy()
+    shape = img.shape
+    for row in range(shape[0]):
+        for x in range(shape[1]):
+            if img[row,x] > thresh:
+                newImg[row,x] = 1
+            else:
+                newImg[row,x] = 0
+    return newImg
+               
     # TODO-BLOCK-END
 
 
