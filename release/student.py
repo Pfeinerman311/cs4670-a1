@@ -6,7 +6,9 @@ def add(img, alpha):
     #Additionally clips values to between 0 and 1 (see utils.clip)
     # TODO 1a
     # TODO-BLOCK-BEGIN
-    pass
+    for pixel in img:
+        pixel = pixel + alpha
+    utils.clip(img)
     # TODO-BLOCK-END
 
 def multiply(img, alpha):
@@ -14,7 +16,10 @@ def multiply(img, alpha):
     # additionally clips values
     # TODO 1b
     # TODO-BLOCK-BEGIN
-    pass
+    # TODO-BLOCK-BEGIN
+    for pixel in img:
+        pixel = pixel * alpha
+    utils.clip(img)    
     # TODO-BLOCK-END
 
 def normalize(img):
