@@ -14,7 +14,11 @@ class ConvolutionTestCase(unittest.TestCase):
 
     def testValues(self):
         output = student.convolve(self.random_img, self.random_filt)
+        print("Output")
+        print(output)
         output_gt = convolve2d(self.random_img, self.random_filt, mode='same')
+        print("Output_gt")
+        print(output_gt)
         self.assertTrue(np.allclose(output, output_gt), 'Incorrect values')
 
     def testValuesFlipped(self):

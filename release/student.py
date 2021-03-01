@@ -75,21 +75,25 @@ def convolve(img, filt):
     # TODO-BLOCK-BEGIN
     newImg = img.copy()
     imgShape = img.shape
+    vert = np.flip(filt,0)
+    conv = np.flip(vert,1)
     filtX = (filt.shape[0]-1)//2
     filtY = (filt.shape[1]-1)//2
-   # print(filtX)
-   # print(filtY)
+    print(range(-filtX,filtX))
+    print(range(-filtY,filtY))
     for m in range(imgShape[0]):
         for n in range(imgShape[1]):
             filtProd = 0
-            for i in range(-filtX, filtX+1):
-                for j in range(-filtY, filtY+1):
+            #fI = 0
+            for i in range(-filtX,filtX+1):
+                #fJ = 0
+                for j in range(-filtY,filtY+1):
                     mi = m + i
                     nj = n + j
-                    if((mi < 0 or mi >= imgShape[0]) or (nj < 0 or nj >= imgShape[1])):
-                        filtProd = filtProd
-                    else:
-                        filtProd = filtProd + img[mi,nj] * filt[i+filtX,j+filtY]              
+                    if((mi >= 0 and mi < imgShape[0]) and (nj >= 0 and nj < imgShape[1])):
+                        filtProd = filtProd + img[mi,nj] * conv[i + filtX, j + filtY]
+                    #fJ = fJ + 1
+                #fI = fI + 1
             newImg[m,n] = filtProd
     return newImg
     # TODO-BLOCK-END
