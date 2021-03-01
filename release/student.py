@@ -109,10 +109,17 @@ def gaussian_filter(k, sigma):
     # Produces a k x k gaussian filter with standard deviation sigma
     # Assume k is odd
     assert k%2!=0, "Kernel size must be odd"
-
     # TODO 3b
     # TODO-BLOCK-BEGIN
-    pass
+    filt = np.ones((k,k))
+    sum = 0
+    for x in range(k):
+        for y in range(k):
+            filt[x,y] = (1/(2*np.pi*sigma**2))*np.e**((x**2+y**2)/(2*sigma**2))
+            sum = sum + (1/(2*np.pi*sigma**2))*np.e**((x**2+y**2)/(2*sigma**2))
+    print(sum)
+    return filt
+    
     # TODO-BLOCK-END
 
 def dx_filter():
