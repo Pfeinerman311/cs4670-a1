@@ -73,7 +73,22 @@ def convolve(img, filt):
 
     # TODO 2
     # TODO-BLOCK-BEGIN
-    pass
+    newImg = img.copy()
+    imgShape = img.shape
+    filtX = (filt.shape[0] - 1)//2
+    filtY = (filt.shape[1] - 1)//2
+    for m in range(imgShape[0]):
+        for n in range(imgShape[1]):
+            filtProd = 0
+            for i in range(-filtX, filtX):
+                for j in range(-filtY, filtY):
+                    mi = m - i
+                    nj = n - j
+                    if (mi > -filtX and nj > -filtY and mi < filtX and nj < filtY):
+                        # if (i - filtX > 0 and i + filtX < imgShape[0] and j - filtY > 0 and j + filtY < imgShape[1]):
+                        filtProd = filtProd + img[i,j] * filt[mi,nj]
+        newImg[m,n] = filtProd
+    return newImg
     # TODO-BLOCK-END
 
 def mean_filter(k):
@@ -82,7 +97,8 @@ def mean_filter(k):
     assert k%2!=0, "Kernel size must be odd"
     # TODO 3a
     # TODO-BLOCK-BEGIN
-    pass
+    filt = np.ones((k,k))
+    return np.multiply(filt, 1/(k*k))
     # TODO-BLOCK-END
 
 
