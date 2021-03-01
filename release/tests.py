@@ -28,6 +28,9 @@ class GaussianTestCase(unittest.TestCase):
 
     def testSum(self):
         output = student.gaussian_filter(5,1)
+        print("Sum = ")
+        print(output.sum())
+        print(output)
         self.assertTrue(np.allclose(output.sum(),1),'Filters must sum to 1.')
 
     def testValues(self):

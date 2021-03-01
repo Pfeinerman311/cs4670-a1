@@ -84,8 +84,8 @@ def convolve(img, filt):
             filtProd = 0
             for i in range(-filtX, filtX+1):
                 for j in range(-filtY, filtY+1):
-                    mi = m + i
-                    nj = n + j
+                    mi = m + i #m - i ???
+                    nj = n + j #n - j???
                     if((mi < 0 or mi >= imgShape[0]) or (nj < 0 or nj >= imgShape[1])):
                         filtProd = filtProd
                     else:
@@ -112,14 +112,13 @@ def gaussian_filter(k, sigma):
     # TODO 3b
     # TODO-BLOCK-BEGIN
     filt = np.ones((k,k))
-    sum = 0
     for x in range(k):
         for y in range(k):
-            filt[x,y] = (1/(2*np.pi*sigma**2))*np.e**((x**2+y**2)/(2*sigma**2))
-            sum = sum + (1/(2*np.pi*sigma**2))*np.e**((x**2+y**2)/(2*sigma**2))
-    print(sum)
-    return filt
-    
+            filt[x,y] = np.e**np.negative(((x**2+y**2)/(2*sigma**2)))
+            #(1/(2*np.pi*sigma**2))*np.e**(np.negative((x**2+y**2)/(2*sigma**2)))
+    sum = filt.sum()
+    nFilt = np.divide(filt, sum)
+    return nFilt
     # TODO-BLOCK-END
 
 def dx_filter():
@@ -137,7 +136,7 @@ def dy_filter():
     # TODO-BLOCK-END
 
 def gradient_magnitude(img, k=3,sigma=0):
-    # Compute the gradient magnitude at each pixel,,
+    # Compute the gradient magnitude at each pixel,
     # If sigma >0, smooth the
     # image with a gaussian first
     # TODO 4c
