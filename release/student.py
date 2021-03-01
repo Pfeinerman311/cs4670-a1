@@ -116,10 +116,10 @@ def gaussian_filter(k, sigma):
     # TODO 3b
     # TODO-BLOCK-BEGIN
     filt = np.ones((k,k))
+    center = k//2
     for x in range(k):
         for y in range(k):
-            filt[x,y] = np.e**np.negative(((x**2+y**2)/(2*sigma**2)))
-            #(1/(2*np.pi*sigma**2))*np.e**(np.negative((x**2+y**2)/(2*sigma**2)))
+            filt[x,y] = np.e**np.negative((((x-center)**2+(y-center)**2)/(2*sigma**2)))
     sum = filt.sum()
     nFilt = np.divide(filt, sum)
     return nFilt
