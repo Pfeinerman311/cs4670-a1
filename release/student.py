@@ -129,14 +129,17 @@ def dx_filter():
     # Produces a 1 x 3 filter that computes the derivative in x direction
     # TODO 4a
     # TODO-BLOCK-BEGIN
-    pass
+    filt = np.ones((1,3))
+    filt[0,1] = 0
+    filt[0,2] = -1
+    return filt
     # TODO-BLOCK-END
 
 def dy_filter():
     # Produces a 3 x 1 filter that computes the derivative in y direction
     # TODO 4b
     # TODO-BLOCK-BEGIN
-    pass
+    return np.rot90(dx_filter(),3)
     # TODO-BLOCK-END
 
 def gradient_magnitude(img, k=3,sigma=0):
@@ -145,5 +148,13 @@ def gradient_magnitude(img, k=3,sigma=0):
     # image with a gaussian first
     # TODO 4c
     # TODO-BLOCK-BEGIN
-    pass
+    newImg = img.copy()
+    if (sigma > 0):
+        newImg = convolve(newImg, gaussian_filter(k,sigma))
+    xFilt = convolve(newImg, dx_filter())
+    yFilt = convolve(newImg, dy_filter())
+    for x in range(img.shape[0]):
+        for y in range(img.shape[1]):
+            newImg[x,y] = np.sqrt((xFilt[x,y]**2) + (yFilt[x,y]**2))
+    return newImg
     # TODO-BLOCK-END
