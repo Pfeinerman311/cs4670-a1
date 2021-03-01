@@ -77,15 +77,15 @@ def convolve(img, filt):
     imgShape = img.shape
     filtX = (filt.shape[0]-1)//2
     filtY = (filt.shape[1]-1)//2
-    print(filtX)
-    print(filtY)
+   # print(filtX)
+   # print(filtY)
     for m in range(imgShape[0]):
         for n in range(imgShape[1]):
             filtProd = 0
-            for i in range(-filtX, filtX):
-                for j in range(-filtY, filtY):
-                    mi = m - i
-                    nj = n - j
+            for i in range(-filtX, filtX+1):
+                for j in range(-filtY, filtY+1):
+                    mi = m + i
+                    nj = n + j
                     if((mi < 0 or mi >= imgShape[0]) or (nj < 0 or nj >= imgShape[1])):
                         filtProd = filtProd
                     else:
@@ -131,7 +131,7 @@ def dy_filter():
 
 def gradient_magnitude(img, k=3,sigma=0):
     # Compute the gradient magnitude at each pixel,,
-    # If sigma >0, smmooth the
+    # If sigma >0, smooth the
     # image with a gaussian first
     # TODO 4c
     # TODO-BLOCK-BEGIN
